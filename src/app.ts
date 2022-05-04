@@ -1,19 +1,25 @@
-import express from 'express';
+import express, { Router } from 'express';
 import fs from 'fs';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import ModelRoutes from './model/model.routes';
 import { Model } from './model/model.schema';
+
+interface Route {
+    router: Router;
+}
 
 class App {
     private app: express.Application;
 
-    constructor() {
+    constructor(routes: Route[]) {
         this.app = express();
         dotenv.config();
         this.initializeMiddlewares();
+        this.initializeRoutes(routes);
         this.connectDB();
-        this.seedDB();
+        //this.seedDB();
     }
 
     public listen(): void {
@@ -29,6 +35,10 @@ class App {
         this.app.use(express.json());
     }
 
+    private initializeRoutes(routes: Route[]): void {
+        routes.forEach((route) => this.app.use('/models', route.router));
+    }
+
     private connectDB() {
         mongoose
             .connect(`${process.env.MONGODB_CONNECT_URI}`)
@@ -42,5 +52,5 @@ class App {
     }
 }
 
-const app = new App();
+const app = new App([new ModelRoutes()]);
 app.listen();
