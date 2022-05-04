@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Flower",
+        "nodes": {
+            "Blossom": "#ffffff",
+            "Stem": "#ffffff"
+        }
+    },
+    {
+        "name": "Cube",
+        "geometry": {
+            "width": 5,
+            "height": 5,
+            "depth": 5
+        },
+        "color": "#777777",
+        "scale": 3,
+        "__v": 0
+    },
+    {
+        "name": "Sphere",
+        "geometry": {
+            "radius": 7,
+            "widthSegments": 7,
+            "heightSegments": 7
+        },
+        "color": "#333333",
+        "scale": 3,
+        "__v": 0
+    },
+    {
+        "name": "Shoe"
+    }
+]

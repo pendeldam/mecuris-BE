@@ -1,7 +1,9 @@
 import express from 'express';
+import fs from 'fs';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import { Model } from './model/model.schema';
 
 class App {
     private app: express.Application;
@@ -11,6 +13,7 @@ class App {
         dotenv.config();
         this.initializeMiddlewares();
         this.connectDB();
+        this.seedDB();
     }
 
     public listen(): void {
@@ -26,12 +29,16 @@ class App {
         this.app.use(express.json());
     }
 
-
     private connectDB() {
         mongoose
             .connect(`${process.env.MONGODB_CONNECT_URI}`)
             .then(() => console.log('MongoDB Connected'))
             .catch((error) => console.log(error));
+    }
+
+    private async seedDB() {
+        const models = JSON.parse(fs.readFileSync(`${__dirname}/utils/seeder.json`, 'utf-8'));
+        await Model.create(models);
     }
 }
 
