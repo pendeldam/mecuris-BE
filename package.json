@@ -5,7 +5,8 @@
   "main": "app.ts",
   "scripts": {
     "server": "nodemon -L ./src/app.ts",
-    "dev": "npm run server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix"
   },

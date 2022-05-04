@@ -6,6 +6,9 @@
 > * rename **.dot-env** to **.env**
 > * run this command to build mongodb with docker:  
 >  * _`docker-compose -f docker-compose.yml up -d`_
+> * clone mecuris-three-FE repository (https://github.com/pendeldam/mecuris-three-FE)
+> * place its content inside client folder in the project folder
+> * run inside client folder npm run i
 > * run inside project folder npm run dev
 
 ### App components:
