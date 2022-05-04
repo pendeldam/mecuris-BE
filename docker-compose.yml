@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+    mongodb:
+        image: mongo
+        restart: always
+        env_file: ./.env
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=$MONGODB_ADMIN_USERNAME
+            - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_ADMIN_PASSWORD
+        ports:
+            - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
